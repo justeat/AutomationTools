@@ -1,0 +1,13 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '11.0'
+
+target 'AutomationTools_Example' do
+  pod 'AutomationTools/HostApp', :path => '../'
+  
+end
+
+target 'AutomationTools_UITests' do
+  pod 'AutomationTools/Core', :path => '../'
+    
+end
