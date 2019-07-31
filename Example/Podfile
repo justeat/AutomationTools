@@ -4,10 +4,10 @@ platform :ios, '11.0'
 
 target 'AutomationTools_Example' do
   pod 'AutomationTools/HostApp', :path => '../'
-  
+  pod 'JustTweak', '~> 4.0.0'
 end
 
 target 'AutomationTools_UITests' do
   pod 'AutomationTools/Core', :path => '../'
-    
+  pod 'JustTweak', '~> 4.0.0'
 end

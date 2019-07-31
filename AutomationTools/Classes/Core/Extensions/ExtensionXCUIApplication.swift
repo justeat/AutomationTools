@@ -8,6 +8,7 @@
 
 import Foundation
 import XCTest
+import JustTweak
 
 public struct Flag {
     public let key: String
@@ -27,15 +28,9 @@ extension XCUIApplication {
         for flag in featureFlags {
             let key = flag.key
             let value = flag.value
-            // this check on the class is 'unfortunately' necessary to do here if
-            // we want to allow a nicer way to pass flags from the UI Tests
             switch value {
-            case is Bool:
-                ephemeralConfiguration.set(value as! Bool, feature: "", variable: key)
-            case is String:
-                ephemeralConfiguration.set(value as! String, feature: "", variable: key)
-            case is NSNumber:
-                ephemeralConfiguration.set(value as! NSNumber, feature: "", variable: key)
+            case is TweakValue:
+                ephemeralConfiguration.set(value as! TweakValue, feature: "", variable: key)
             default: ()
             }
         }
@@ -45,17 +40,9 @@ extension XCUIApplication {
         for flag in automationFlags {
             let key = flag.key
             let value = flag.value
-            // this check on the class is 'unfortunately' necessary to do here if
-            // we want to allow a nicer way to pass flags from the UI Tests
             switch value {
-            case is Bool:
-                automationConfiguration[key] = NSNumber(value: value as! Bool)
-            case is Int:
-                automationConfiguration[key] = NSNumber(value: value as! Int)
-            case is String:
-                automationConfiguration[key] = value
-            case is NSNumber:
-                automationConfiguration[key] = value
+            case is TweakValue:
+                automationConfiguration[key] = value as! TweakValue
             default: ()
             }
         }

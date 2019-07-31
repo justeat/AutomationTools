@@ -1,18 +1,19 @@
 PODS:
-  - AutomationTools/Core (1.0.0):
+  - AutomationTools/Core (1.1.0):
     - JustTweak
-  - AutomationTools/HostApp (1.0.0):
+  - AutomationTools/HostApp (1.1.0):
     - JustTweak
-  - JustTweak (3.5.0):
-    - JustTweak/Core (= 3.5.0)
-    - JustTweak/UI (= 3.5.0)
-  - JustTweak/Core (3.5.0)
-  - JustTweak/UI (3.5.0):
+  - JustTweak (4.0.0):
+    - JustTweak/Core (= 4.0.0)
+    - JustTweak/UI (= 4.0.0)
+  - JustTweak/Core (4.0.0)
+  - JustTweak/UI (4.0.0):
     - JustTweak/Core
 
 DEPENDENCIES:
   - AutomationTools/Core (from `../`)
   - AutomationTools/HostApp (from `../`)
+  - JustTweak (= 4.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -23,9 +24,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AutomationTools: c5230669de7a76d6e4e4eb2dd720c15c9bdb5b48
-  JustTweak: 01cf18b06845c30ecac27c123f2d30f89eece01c
+  AutomationTools: bec0bb028c4fba543de6ab818dc59786adf28e65
+  JustTweak: 3edc6464d63601037a507571c6efa27a55d75988
 
-PODFILE CHECKSUM: 17186affbdbcd4414b3f284b097accf2537e53da
+PODFILE CHECKSUM: b1f1ca5a679f1f82586e34ea188cb6036552c64b
 
 COCOAPODS: 1.6.2
