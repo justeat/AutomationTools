@@ -108,10 +108,12 @@ class ExampleTestCases: JEXCTestCase {
         // Test steps
        ...
     }
-} ```
+} 
+```
 
 #### HostApp
 Extend AutomationBridge to include the methods required for state configuration
+
 ```swift
 import Foundation
 import AutomationTools
@@ -121,16 +123,18 @@ public extension AutomationBridge {
      public var simulateUserAlreadyLoggedIn: Bool {
         return automationConfiguration?[Constants.simulateUserAlreadyLoggedIn] as? Bool ?? false
     }
-} ```
+} 
+```
 
 AutomationBridge.swift exposes the ephemeral configuration which should be used by a coordinator to apply the relevant state.
+
 ```swift
     if let ephemeralConfiguration = automationBridge.ephemeralConfiguration {
         // use ephemeralConfiguration to setup your environment
         // or setup a coordinator with JustTweak
 
-    } ```
-
+    } 
+```
 
 ## Installation
 
