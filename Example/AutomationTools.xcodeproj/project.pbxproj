@@ -308,15 +308,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AutomationTools_UITests/Pods-AutomationTools_UITests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/JustTweak/JustTweak.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JustTweak.bundle",
 			);
@@ -330,15 +326,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AutomationTools_Example/Pods-AutomationTools_Example-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/JustTweak/JustTweak.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JustTweak.bundle",
 			);
