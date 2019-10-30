@@ -16,7 +16,7 @@ DEPENDENCIES:
   - JustTweak (~> 4.0.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - JustTweak
 
 EXTERNAL SOURCES:
@@ -24,9 +24,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AutomationTools: bac71750edecbfdcaf0b01ab318c809d185b3ec8
+  AutomationTools: 69b1a9a619d03df6afb11a720b44eeabb8885873
   JustTweak: 3edc6464d63601037a507571c6efa27a55d75988
 
 PODFILE CHECKSUM: 8a29f52cf8437bcd099e73594789309e5e0d7ad1
 
-COCOAPODS: 1.6.2
+COCOAPODS: 1.8.4
