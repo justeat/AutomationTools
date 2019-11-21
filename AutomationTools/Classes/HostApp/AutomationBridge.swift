@@ -17,13 +17,13 @@ import Foundation
         return launchArgumentsContain(runningAutomationTests)
     }
     
-    public var ephemeralConfiguration: NSMutableDictionary? {
+    public var ephemeralConfiguration: NSDictionary? {
         return configuration(withPrefix: "EPHEMERAL")
     }
     
     // MARK: Private
 
-    public var automationConfiguration: NSMutableDictionary? {
+    public var automationConfiguration: NSDictionary? {
         return configuration(withPrefix: "AUTOMATION")
     }
     

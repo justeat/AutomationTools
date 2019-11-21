@@ -10,11 +10,11 @@ import Foundation
 
 struct LaunchArgumentsBuilder {
     
-    static public func launchArgumentForEphemeralConfiguration(_ ephemeralConfiguration: NSMutableDictionary) -> String {
+    static public func launchArgumentForEphemeralConfiguration(_ ephemeralConfiguration: NSDictionary) -> String {
         return launchArgumentForConfiguration(ephemeralConfiguration, prefix: "EPHEMERAL")
     }
     
-    static public func launchArgumentForAutomationConfiguration(_ automationConfiguration: NSMutableDictionary) -> String {
+    static public func launchArgumentForAutomationConfiguration(_ automationConfiguration: NSDictionary) -> String {
         return launchArgumentForConfiguration(automationConfiguration, prefix: "AUTOMATION")
     }
     
