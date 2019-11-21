@@ -1,10 +1,11 @@
 Pod::Spec.new do |s|
   s.name             = 'AutomationTools'
-  s.version          = '1.1.1'
+  s.version          = '2.0.0'
   s.summary          = 'iOS UI test framework and guidelines'
   s.homepage         = 'https://github.com/justeat/AutomationTools'
   s.license          = { :type => 'Apache 2.0', :file => 'LICENSE' }
-  s.author           = { 'Alberto De Bortoli' => 'alberto.debortoli@just-eat.com', 'Sneha Narayana Swamy' => 'sneha.narayanaswamy@just-eat.com' }
+  s.author           = { 'Alberto De Bortoli' => 'alberto.debortoli@just-eat.com',
+                         'Sneha Narayana Swamy' => 'sneha.narayanaswamy@just-eat.com' }
   s.source           = { :git => 'https://github.com/justeat/AutomationTools.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '11.0'
