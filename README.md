@@ -20,17 +20,21 @@ AutomationTools is sectioned in to Core and HostApp. Core consists of app state 
 - `LaunchArgumentsBuilder.swift` used in `ExtensionXCUIApplication.swift` has the following 2 methods exposed:
 
 ```swift
-static public func launchArgumentForEphemeralConfiguration(_ ephemeralConfiguration: NSMutableDictionary) -> String
-static public func launchArgumentForAutomationConfiguration(_ automationConfiguration: NSMutableDictionary) -> String
+static public func launchArgumentForEphemeralConfiguration(_ ephemeralConfiguration: NSDictionary) -> String
+static public func launchArgumentForAutomationConfiguration(_ automationConfiguration: NSDictionary) -> String
 ```
 
-There is a nice trick here: since information from UI Tests process to app process happens via `ProcessInfo.processInfo.arguments`, which is typed `[String]`, we convert a dictionary of flags to a single string representation and marshal/unmarshal it. We pass in separate arrays for featureFlags(drive decision making paths. for our products at Just Eat we use the [JustTweak](https://github.com/justeat/JustTweak) and for automationFlags(setup app environment. e.g. directly deeplink to a specific screen, simulate the user to be logged in at startup, etc.) , and LaunchArgumentBuilder will add "EPHEMERAL" prefix to feature flags & "AUTOMATION" prefix to automation flags arguments to distinguish them easily to allow the unmarshalling in the app (via the later on described `AutomationBridge.swift`).
+There is a nice trick here: since information from UI Tests process to app process happens via `ProcessInfo.processInfo.arguments`, which is typed `[String]`, we convert a dictionary of flags to a single string representation and marshal/unmarshal it. We pass in separate arrays for feature flags and automation flags.
+Feature flags drive decision making paths while automation flags are used to setup the app environment (e.g. directly deeplink to a specific screen, simulate the user to be logged in at startup, etc.).  `LaunchArgumentBuilder` will add "EPHEMERAL" prefix to feature flags & "AUTOMATION" prefix to automation flags arguments to distinguish them easily to allow the unmarshalling in the app (via the later on described `AutomationBridge.swift`).
 
 Flags are structs defined as:
+
+```swift
 public struct Flag {
     public let key: String
     public let value: Any
 }
+```
 
 - `PageObject.swift` is the base class of the page objects defined in the client code. It holds references to `XCUIApplication` and the current `XCTestCase`.
 
@@ -49,11 +53,12 @@ func waitForElementValueToExist(element: XCUIElement, valueString: String, timeo
 
 ```swift
 launchApp(featureFlags: [Flag] = [], 
-            automationFlags: [Flag] = [], 
-            envVariables: [String : String] = [:],
-            otherArgs: [String] = [])
+          automationFlags: [Flag] = [], 
+          envVariables: [String : String] = [:],
+          otherArgs: [String] = [])
 ```
-We pass in arrays of Flags to the launchApp() method which will then be marshalled using the LaunchArgumentBuilder by adding appropriate "EPHEMERAL" and "AUTOMATION" flags and converted into String representation.
+We pass in arrays of Flags to the launchApp() method which will then be marshalled using the LaunchArgumentBuilder by adding appropriate "EPHEMERAL" and "AUTOMATION" prefixes and converted into String representation.
+
 
 ### HostApp
 
@@ -61,8 +66,8 @@ The client should have a component able to inspect the flags in the `ProcessInfo
 
 ```swift
 public var isRunningAutomationTests: Bool
-public var ephemeralConfiguration: NSMutableDictionary?
-public var automationConfiguration: NSMutableDictionary?
+public var ephemeralConfiguration: NSDictionary?
+public var automationConfiguration: NSDictionary?
 ```
 
 Running a test via the `XCUIApplication`'s `launchApp` method, the arguments that can be extracted in the `ProcessInfo` should now be no more than 3:
@@ -73,26 +78,13 @@ Running a test via the `XCUIApplication`'s `launchApp` method, the arguments tha
 
 Extensions of `AutomationBridge` in the client code should expose methods like `simulateUserAlreadyLoggedIn()` checking for the existence of a value in the automation configuration. The client app uses these methods to drive decisions and simplify the execution of the UI tests.
 
-`AutomationBridge` also publicly exposes the ephemeral configuration that is ultimately used to setup feature flags in the client code. Again, we suggest to use our [JustTweaks](https://github.com/justeat/JustTweak) setting up a coordinator with an ephemeral configuration (it should also have max priority (`TweaksConfigurationPriority.high`) that should be the first one in the list of configurations. E.g.
+`AutomationBridge` also publicly exposes the `ephemeralConfiguration` property (`NSDictionary` type) that is ultimately used to setup feature flags in the client code. The name comes from [JustTweaks](https://github.com/justeat/JustTweak) where `NSDictionary` and `NSMutableDictionary` are respectively made conformat to `Configuration` and `MutableConfiguration`, and we suggest to use it to setup a stack to ease to usage of featue flags.
 
-```swift
-lazy var tweaksCoordinator: TweaksConfigurationsCoordinator = {
-    let jsonURL = Bundle.main.url(forResource: "Tweaks", withExtension: "json")!
-    let jsonConfiguration = JSONTweaksConfiguration(defaultValuesFromJSONAtURL: jsonURL)!
-    let userConfiguration = UserDefaultsTweaksConfiguration(userDefaults: UserDefaults.standard, fallbackConfiguration: jsonConfiguration)
-
-    var configurations: [TweaksConfiguration] = [jsonConfiguration, userConfiguration]
-
-    if let ephemeralConfiguration = automationBridge.ephemeralConfiguration {
-        configurations = [ephemeralConfiguration] + configurations
-    }
-
-    return TweaksConfigurationsCoordinator(configurations: configurations)!
-}()
-```
 
 ### Example
+
 #### Core
+
 Call the launchApp() method from the test case with relevant configuration to set up and run the test case that inherits from JEXCTestCase. The launchApp() method gets the injected flags/arguments marshalled through LaunchArgumentsBuilder and launches the app with the correct configuration.
 
 ```swift
@@ -112,7 +104,8 @@ class ExampleTestCases: JEXCTestCase {
 ```
 
 #### HostApp
-Extend AutomationBridge to include the methods required for state configuration
+
+Extend `AutomationBridge` to include methods required for configuring the environment.
 
 ```swift
 import Foundation
@@ -126,14 +119,30 @@ public extension AutomationBridge {
 } 
 ```
 
-AutomationBridge.swift exposes the ephemeral configuration which should be used by a coordinator to apply the relevant state.
+and use the ephemeral configuration to setup app configuration.
 
 ```swift
-    if let ephemeralConfiguration = automationBridge.ephemeralConfiguration {
-        // use ephemeralConfiguration to setup your environment
-        // or setup a coordinator with JustTweak
+if let ephemeralConfiguration = automationBridge.ephemeralConfiguration {
+    // use ephemeralConfiguration to setup app configuration
+    // or setup a TweakManager with JustTweak
+}
+```
 
-    } 
+Here's an example of a stack setup with JustTweak:
+
+```swift
+lazy var tweakManager: TweakManager = {
+    let ephemeralConfiguration = automationBridge.ephemeralConfiguration
+    
+    let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
+
+    let jsonURL = Bundle.main.url(forResource: "Tweaks", withExtension: "json")!
+    let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
+    
+    let configurations: [Configuration] = [ephemeral, userDefaultsConfiguration, localConfiguration].compactMap { $0 }
+
+    return TweakManager(configurations: configurations)
+}()
 ```
 
 ## Installation
