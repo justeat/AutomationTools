@@ -11,14 +11,12 @@ Pod::Spec.new do |s|
   s.swift_version = '5.0'
   
   s.subspec 'HostApp' do |ss|
-      ss.ios.source_files = ['AutomationTools/Classes/HostApp/**/*', 'AutomationTools/Classes/Shared/**/*']
-      ss.dependency 'JustTweak'
+      ss.ios.source_files = ['AutomationTools/Classes/HostApp/**/*']
   end
   
   s.subspec 'Core' do |ss|
-      ss.ios.source_files = ['AutomationTools/Classes/Core/**/*', 'AutomationTools/Classes/Shared/**/*']
+      ss.ios.source_files = ['AutomationTools/Classes/Core/**/*']
       ss.ios.frameworks = ['Foundation', 'XCTest']
-      ss.dependency 'JustTweak'
   end
   
 end
