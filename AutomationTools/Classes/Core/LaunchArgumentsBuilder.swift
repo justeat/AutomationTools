@@ -18,7 +18,7 @@ struct LaunchArgumentsBuilder {
         return launchArgumentForConfiguration(automationConfiguration, prefix: "AUTOMATION")
     }
     
-    static private func launchArgumentForConfiguration(_ configuration: NSMutableDictionary, prefix: String) -> String {
+    static private func launchArgumentForConfiguration(_ configuration: NSDictionary, prefix: String) -> String {
         guard JSONSerialization.isValidJSONObject(configuration) else { return "" }
         let jsonData = try! JSONSerialization.data(withJSONObject: configuration, options: [])
         let jsonString = String(data: jsonData, encoding: .utf8)!
