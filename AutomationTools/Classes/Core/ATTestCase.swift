@@ -1,5 +1,5 @@
 //
-//  JustEatTestCase.swift
+//  ATTestCase.swift
 //  JUSTEAT
 //
 //  Created by Alan Nichols on 2/13/17.
@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 
-open class JustEatTestCase: XCTestCase {
+open class ATTestCase: XCTestCase {
     
     public var app: XCUIApplication!
     

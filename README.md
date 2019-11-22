@@ -15,7 +15,7 @@ AutomationTools is sectioned in to Core and HostApp. Core consists of app state 
 
 ### Core
 
-- `JustEatTestCase.swift` is the base class inherited from XCTestCase to be used for all the UI test suites. It holds a reference to `XCUIApplication`.
+- `ATTestCase.swift` is the base class inherited from XCTestCase to be used for all the UI test suites. It holds a reference to `XCUIApplication`.
 
 - `LaunchArgumentsBuilder.swift` used in `ExtensionXCUIApplication.swift` has the following 2 methods exposed:
 
