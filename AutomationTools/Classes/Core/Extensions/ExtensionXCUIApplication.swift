@@ -8,7 +8,6 @@
 
 import Foundation
 import XCTest
-import JustTweak
 
 public struct Flag {
     public let key: String
@@ -29,8 +28,8 @@ extension XCUIApplication {
             let key = flag.key
             let value = flag.value
             switch value {
-            case is TweakValue:
-                ephemeralConfiguration.set(value as! TweakValue, feature: "", variable: key)
+            case is Bool, is Int, is Double, is Float, is String:
+                ephemeralConfiguration[key] = value
             default: ()
             }
         }
@@ -41,8 +40,8 @@ extension XCUIApplication {
             let key = flag.key
             let value = flag.value
             switch value {
-            case is TweakValue:
-                automationConfiguration[key] = value as! TweakValue
+            case is Bool, is Int, is Double, is Float, is String:
+                automationConfiguration[key] = value
             default: ()
             }
         }
