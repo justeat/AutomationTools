@@ -15,7 +15,15 @@ AutomationTools is sectioned in to Core and HostApp. Core consists of app state 
 
 ### Core
 
-- `ATTestCase.swift` is the base class inherited from XCTestCase to be used for all the UI test suites. It holds a reference to `XCUIApplication`.
+- `ATTestCase.swift` is the base class inherited from XCTestCase to be used for all the UI test suites. It holds a reference to `XCUIApplication` and provides a `launchApp` method to be used to run the app from the tests:
+
+```swift
+launchApp(featureFlags: [Flag] = [], 
+          automationFlags: [Flag] = [], 
+          envVariables: [String : String] = [:],
+          otherArgs: [String] = [])
+```
+We pass in arrays of Flags to the `launchApp` method which will then be marshalled using the LaunchArgumentBuilder by adding appropriate "EPHEMERAL" and "AUTOMATION" prefixes and converted into String representation.
 
 - `LaunchArgumentsBuilder.swift` used in `ExtensionXCUIApplication.swift` has the following 2 methods exposed:
 
@@ -49,17 +57,6 @@ func waitForElementToExist(element: XCUIElement, timeout: Double = 10)
 func waitForElementValueToExist(element: XCUIElement, valueString: String, timeout: Double = 10)
 ```
 
-- `ExtensionXCUIApplication.swift` extends `XCUIApplication` providing a launchApp method to be used to run the app from the tests:
-
-```swift
-launchApp(featureFlags: [Flag] = [], 
-          automationFlags: [Flag] = [], 
-          envVariables: [String : String] = [:],
-          otherArgs: [String] = [])
-```
-We pass in arrays of Flags to the launchApp() method which will then be marshalled using the LaunchArgumentBuilder by adding appropriate "EPHEMERAL" and "AUTOMATION" prefixes and converted into String representation.
-
-
 ### HostApp
 
 The client should have a component able to inspect the flags in the `ProcessInfo`. This can be done via `AutomationBridge.swift`, which exposes the following methods:
@@ -70,7 +67,7 @@ public var ephemeralConfiguration: NSDictionary?
 public var automationConfiguration: NSDictionary?
 ```
 
-Running a test via the `XCUIApplication`'s `launchApp` method, the arguments that can be extracted in the `ProcessInfo` should now be no more than 3:
+Running a test via the `ATTestCase`'s `launchApp` method, the arguments that can be extracted in the `ProcessInfo` should now be no more than 3:
 
 - One that signifies the fact that we are running UI tests at all
 - One containing all the feature flags (optional)
@@ -85,17 +82,17 @@ Extensions of `AutomationBridge` in the client code should expose methods like `
 
 #### Core
 
-Call the launchApp() method from the test case with relevant configuration to set up and run the test case that inherits from JEXCTestCase. The launchApp() method gets the injected flags/arguments marshalled through LaunchArgumentsBuilder and launches the app with the correct configuration.
+Call the launchApp() method from the test case with relevant configuration to set up and run the test case that inherits from `ATTestCase`. The launchApp() method gets the injected flags/arguments marshalled through LaunchArgumentsBuilder and launches the app with the correct configuration.
 
 ```swift
 import XCTest
 import AutomationTools
 
-class ExampleTestCases: JEXCTestCase {
+class ExampleTestCases: ATTestCase {
     func testExample1() {
-        app.launchApp(featureFlags: [Flag(key: Constants.feature1, value: false)],
-                      automationFlags: [Flag(key: Constants.simulateUserAlreadyLoggedIn, value: true)],
-                      otherArgs: [Constants.defaultStubBundle])
+        launchApp(featureFlags: [Flag(key: Constants.feature1, value: false)],
+                  automationFlags: [Flag(key: Constants.simulateUserAlreadyLoggedIn, value: true)],
+                  otherArgs: [Constants.defaultStubBundle])
 
         // Test steps
        ...
