@@ -23,4 +23,49 @@ open class ATTestCase: XCTestCase {
         super.tearDown()
         app.terminate()
     }
+    
+    open func launchApp(featureFlags: [Flag] = [], automationFlags: [Flag] = [], envVariables: [String : String] = [:], otherArgs: [String] = []) {
+        let ephemeralConfiguration = NSMutableDictionary()
+        
+        for flag in featureFlags {
+            let key = flag.key
+            let value = flag.value
+            switch value {
+            case is Bool, is Int, is Double, is Float, is String:
+                ephemeralConfiguration[key] = value
+            default: ()
+            }
+        }
+        
+        let automationConfiguration = NSMutableDictionary()
+        
+        for flag in automationFlags {
+            let key = flag.key
+            let value = flag.value
+            switch value {
+            case is Bool, is Int, is Double, is Float, is String:
+                automationConfiguration[key] = value
+            default: ()
+            }
+        }
+        
+        var args: [String] = ["UI_TEST_MODE"]
+        
+        // Epehmeral
+        if ephemeralConfiguration.count > 0 {
+            args.append(LaunchArgumentsBuilder.launchArgumentForEphemeralConfiguration(ephemeralConfiguration))
+        }
+        
+        // Automation
+        if automationConfiguration.count > 0 {
+            args.append(LaunchArgumentsBuilder.launchArgumentForAutomationConfiguration(automationConfiguration))
+        }
+        
+        // APIStubs, Deeplinks or other launch arguments
+        args = args + otherArgs
+        
+        app.launchArguments = args
+        app.launchEnvironment = envVariables
+        app.launch()
+    }
 }
