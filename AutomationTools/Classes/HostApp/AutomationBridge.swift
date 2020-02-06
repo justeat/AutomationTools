@@ -11,26 +11,19 @@ import Foundation
 @objcMembers public class AutomationBridge: NSObject {
     
     // MARK: Public
-    let runningAutomationTests = "UI_TEST_MODE"
-    
-    public var isRunningAutomationTests: Bool {
-        return launchArgumentsContain(runningAutomationTests)
-    }
-    
     public var ephemeralConfiguration: NSDictionary? {
         return configuration(withPrefix: "EPHEMERAL")
     }
     
-    // MARK: Private
-
     public var automationConfiguration: NSDictionary? {
         return configuration(withPrefix: "AUTOMATION")
     }
     
-    private func launchArgumentsContain(_ launchArgument: String) -> Bool {
+    public func launchArgumentsContain(_ launchArgument: String) -> Bool {
         return ProcessInfo.processInfo.arguments.contains(launchArgument)
     }
     
+    // MARK: Private
     private func configuration(withPrefix prefix: String) -> NSMutableDictionary? {
         let prefixToRemove = "\(prefix)_"
         let arguments = ProcessInfo.processInfo.arguments.filter { $0.hasPrefix(prefixToRemove) }
