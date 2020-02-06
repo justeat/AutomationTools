@@ -24,7 +24,7 @@ open class ATTestCase: XCTestCase {
         app.terminate()
     }
     
-    open func launchApp(featureFlags: [Flag] = [], automationFlags: [Flag] = [], envVariables: [String : String] = [:], otherArgs: [String] = []) {
+    open func launchApp(featureFlags: [Flag] = [], automationFlags: [Flag] = [], envVariables: [String : String] = [:], otherArgs: [String] = [], shouldMockApiCalls: Bool = true) {
         let ephemeralConfiguration = NSMutableDictionary()
         
         for flag in featureFlags {
@@ -49,7 +49,11 @@ open class ATTestCase: XCTestCase {
             }
         }
         
-        var args: [String] = ["UI_TEST_MODE"]
+        // Do not use UI_TEST_MODE when running tests on production
+        var args: [String] = []
+        if (shouldMockApiCalls){
+            args.append("UI_TEST_MODE")
+        }
         
         // Epehmeral
         if ephemeralConfiguration.count > 0 {
