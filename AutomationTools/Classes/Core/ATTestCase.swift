@@ -49,7 +49,7 @@ open class ATTestCase: XCTestCase {
             }
         }
         
-        var args: [String] = ["UI_TEST_MODE"]
+        var args: [String] = []
         
         // Epehmeral
         if ephemeralConfiguration.count > 0 {

@@ -62,14 +62,13 @@ func waitForElementValueToExist(element: XCUIElement, valueString: String, timeo
 The client should have a component able to inspect the flags in the `ProcessInfo`. This can be done via `AutomationBridge.swift`, which exposes the following methods:
 
 ```swift
-public var isRunningAutomationTests: Bool
 public var ephemeralConfiguration: NSDictionary?
 public var automationConfiguration: NSDictionary?
+public func launchArgumentsContain(_ launchArgument: String) -> Bool
 ```
 
-Running a test via the `ATTestCase`'s `launchApp` method, the arguments that can be extracted in the `ProcessInfo` should now be no more than 3:
+Running a test via the `ATTestCase`'s `launchApp` method, the arguments that can be extracted in the `ProcessInfo` should now be no more than 2:
 
-- One that signifies the fact that we are running UI tests at all
 - One containing all the feature flags (optional)
 - One containing all the automation flags (optional)
 
