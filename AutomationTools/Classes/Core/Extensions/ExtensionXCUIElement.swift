@@ -57,7 +57,7 @@ extension XCUIElement {
     
     public func existsOrWaitForExistence(timeout: TimeInterval = 10, mustWait: Bool = false) -> Bool {
         if exists { return true }
-        waitForExistence(timeout: timeout)
+        _ = waitForExistence(timeout: timeout)
         return exists
     }
 }
