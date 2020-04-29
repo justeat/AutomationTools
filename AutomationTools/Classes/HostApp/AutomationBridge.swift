@@ -25,12 +25,12 @@ import Foundation
         return configuration(withPrefix: "AUTOMATION")
     }
     
-    // MARK: Private
-
-    private func launchArgumentsContain(_ launchArgument: String) -> Bool {
+    public func launchArgumentsContain(_ launchArgument: String) -> Bool {
         return ProcessInfo.processInfo.arguments.contains(launchArgument)
     }
-        
+    
+    // MARK: Private
+    
     private func configuration(withPrefix prefix: String) -> NSMutableDictionary? {
         let prefixToRemove = "\(prefix)_"
         let arguments = ProcessInfo.processInfo.arguments.filter { $0.hasPrefix(prefixToRemove) }
