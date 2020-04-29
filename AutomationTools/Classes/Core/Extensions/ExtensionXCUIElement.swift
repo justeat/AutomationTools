@@ -27,17 +27,37 @@ extension XCUIElement {
         startCoord.press(forDuration: 0.01, thenDragTo: endCoord)
     }
     
-    public func waitClearAndEnterText(text: String, timeout: TimeInterval = 10) {
-        _ = self.waitForExistence(timeout: timeout)
-        self.tap()
+    public func waitClearAndEnterText(text: String, timeout: TimeInterval = 10, mustWait: Bool = false) {
+        waitIfNeeded({ _ = waitForExistence(timeout: timeout) },
+                     shouldProceed: !exists || (exists && !isHittable),
+                     mustWait: mustWait)
+        tap()
         guard let string = value as? String else { return }
         let deleteString = string.map{ _ in XCUIKeyboardKey.delete.rawValue }.joined(separator: "")
-        self.typeText(deleteString)
-        self.typeText(text)
+        typeText(deleteString)
+        typeText(text)
     }
     
-    public func waitAndTap(timeout: TimeInterval = 10) {
-        _ = self.waitForExistence(timeout: timeout)
-        self.tap()
+    public func waitAndTap(timeout: TimeInterval = 10, mustWait: Bool = false) {
+        waitIfNeeded({ _ = waitForExistence(timeout: timeout) },
+                     shouldProceed: exists && isHittable,
+                     mustWait: mustWait)
+        tap()
+    }
+    
+    public func waitForElementValueToExist(testCase: XCTestCase, valueString: String, timeout: Double = 10, mustWait: Bool = false) {
+        let initialValue = value as? String
+        waitIfNeeded({
+            testCase.expectation(for: NSPredicate(format: "value == \(valueString)"), evaluatedWith: self, handler: nil)
+            testCase.waitForExpectations(timeout: timeout, handler: nil)
+        },
+                     shouldProceed: initialValue == valueString,
+                     mustWait: mustWait)
+    }
+    
+    public func existsOrWaitForExistence(timeout: TimeInterval = 10, mustWait: Bool = false) -> Bool {
+        if exists { return true }
+        waitForExistence(timeout: timeout)
+        return exists
     }
 }
