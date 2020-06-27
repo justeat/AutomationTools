@@ -1,6 +1,6 @@
 PODS:
-  - AutomationTools/Core (4.1.0)
-  - AutomationTools/HostApp (4.1.0)
+  - AutomationTools/Core (4.1.1-beta)
+  - AutomationTools/HostApp (4.1.1-beta)
 
 DEPENDENCIES:
   - AutomationTools/Core (from `../`)
@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AutomationTools: 3f655a5435a481606b50ea506602180c4dac6c4f
+  AutomationTools: 9341f435339ae8a389ddaaf4c3c0e791b53ca459
 
 PODFILE CHECKSUM: 92dc065c8304485c4f74b34f7e3f06210caf3167
 
