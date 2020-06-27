@@ -22,7 +22,7 @@ func waitIfNeeded(_ block: () -> Void, shouldProceed proceedCondition: @autoclos
 
 extension XCTestCase {
     
-    public func waitForElementToNotExist(element: XCUIElement, timeout: Double = 10, mustWait: Bool = false) {
+    public func waitForElementToNotExist(element: XCUIElement, timeout: Double = 30, mustWait: Bool = true) {
         waitIfNeeded({
             expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: element, handler: nil)
             waitForExpectations(timeout: timeout, handler: nil)
@@ -31,7 +31,7 @@ extension XCTestCase {
                      mustWait: mustWait)
     }
     
-    public func waitForElementToExist(element: XCUIElement, timeout: Double = 10, mustWait: Bool = false) {
+    public func waitForElementToExist(element: XCUIElement, timeout: Double = 30, mustWait: Bool = true) {
         waitIfNeeded({
             expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: element, handler: nil)
             waitForExpectations(timeout: timeout, handler: nil)
@@ -40,7 +40,7 @@ extension XCTestCase {
                      mustWait: mustWait)
     }
     
-    public func waitForElementValueToExist(element: XCUIElement, valueString: String, timeout: Double = 10, mustWait: Bool = false) {
+    public func waitForElementValueToExist(element: XCUIElement, valueString: String, timeout: Double = 30, mustWait: Bool = true) {
         let value = element.value as? String
         waitIfNeeded({
             expectation(for: NSPredicate(format: "value == \(valueString)"), evaluatedWith: element, handler: nil)
@@ -50,21 +50,21 @@ extension XCTestCase {
                      mustWait: mustWait)
     }
     
-    public func waitForElementToBeHittable(element: XCUIElement, timeout: Double = 10, mustWait: Bool = false) {
+    public func waitForElementToBeHittable(element: XCUIElement, timeout: Double = 30, mustWait: Bool = true) {
         waitIfNeeded({
             waitForElementToExist(element: element, timeout: timeout)
             expectation(for: NSPredicate(format: "isHittable == true"), evaluatedWith: element, handler: nil)
-            waitForExpectations(timeout: 2, handler: nil)
+            waitForExpectations(timeout: timeout, handler: nil)
         },
                      shouldProceed: element.isHittable,
                      mustWait: mustWait)
     }
     
-    public func waitForElementToBeEnabled(element: XCUIElement, timeout: Double = 10, mustWait: Bool = false) {
+    public func waitForElementToBeEnabled(element: XCUIElement, timeout: Double = 30, mustWait: Bool = true) {
         waitIfNeeded({
             waitForElementToExist(element: element, timeout: timeout)
             expectation(for: NSPredicate(format: "isEnabled == true"), evaluatedWith: element, handler: nil)
-            waitForExpectations(timeout: 20, handler: nil)
+            waitForExpectations(timeout: timeout, handler: nil)
         },
                      shouldProceed: element.isEnabled,
                      mustWait: mustWait)
