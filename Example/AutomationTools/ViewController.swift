@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AutomationTools_Host
 
 class ViewController: UIViewController {
 

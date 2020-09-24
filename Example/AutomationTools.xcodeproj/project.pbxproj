@@ -28,11 +28,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		100EDA43B637992DAA1AFF08 /* AutomationTools.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AutomationTools.podspec; path = ../AutomationTools.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		31D7FE281E7A855E21C35AE2 /* Pods-AutomationTools_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutomationTools_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AutomationTools_Example/Pods-AutomationTools_Example.release.xcconfig"; sourceTree = "<group>"; };
 		4FAE45AA21CAD21F002779C7 /* AutomationTools_UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutomationTools_UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FAE45AC21CAD21F002779C7 /* AutomationTools_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationTools_UITests.swift; sourceTree = "<group>"; };
 		4FAE45AE21CAD220002779C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4FAF201A251C8223006FA42B /* AutomationTools-Core.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = "AutomationTools-Core.podspec"; path = "../AutomationTools-Core.podspec"; sourceTree = "<group>"; };
+		4FAF201B251C8223006FA42B /* AutomationTools-Host.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = "AutomationTools-Host.podspec"; path = "../AutomationTools-Host.podspec"; sourceTree = "<group>"; };
 		558CDECAC4DD81E0ECF7C5E3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* AutomationTools_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutomationTools_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,7 +126,8 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				100EDA43B637992DAA1AFF08 /* AutomationTools.podspec */,
+				4FAF201A251C8223006FA42B /* AutomationTools-Core.podspec */,
+				4FAF201B251C8223006FA42B /* AutomationTools-Host.podspec */,
 				DF6FE122AB76904C7D1D7CE4 /* README.md */,
 				558CDECAC4DD81E0ECF7C5E3 /* LICENSE */,
 			);

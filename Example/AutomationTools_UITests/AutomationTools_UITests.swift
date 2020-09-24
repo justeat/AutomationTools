@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import AutomationTools_Core
 
 class AutomationTools_UITests: XCTestCase {
 
