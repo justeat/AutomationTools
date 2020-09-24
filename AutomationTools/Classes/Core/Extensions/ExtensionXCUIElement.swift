@@ -27,7 +27,7 @@ extension XCUIElement {
         startCoord.press(forDuration: 0.01, thenDragTo: endCoord)
     }
     
-    public func waitClearAndEnterText(text: String, timeout: TimeInterval = 10, mustWait: Bool = false) {
+    public func waitClearAndEnterText(text: String, timeout: TimeInterval = 30, mustWait: Bool = true) {
         waitIfNeeded({ _ = waitForExistence(timeout: timeout) },
                      shouldProceed: !exists || (exists && !isHittable),
                      mustWait: mustWait)
@@ -38,14 +38,14 @@ extension XCUIElement {
         typeText(text)
     }
     
-    public func waitAndTap(timeout: TimeInterval = 10, mustWait: Bool = false) {
+    public func waitAndTap(timeout: TimeInterval = 30, mustWait: Bool = true) {
         waitIfNeeded({ _ = waitForExistence(timeout: timeout) },
                      shouldProceed: exists && isHittable,
                      mustWait: mustWait)
         tap()
     }
     
-    public func waitForElementValueToExist(testCase: XCTestCase, valueString: String, timeout: Double = 10, mustWait: Bool = false) {
+    public func waitForElementValueToExist(testCase: XCTestCase, valueString: String, timeout: Double = 30, mustWait: Bool = true) {
         let initialValue = value as? String
         waitIfNeeded({
             testCase.expectation(for: NSPredicate(format: "value == \(valueString)"), evaluatedWith: self, handler: nil)
@@ -55,7 +55,7 @@ extension XCUIElement {
                      mustWait: mustWait)
     }
     
-    public func existsOrWaitForExistence(timeout: TimeInterval = 10, mustWait: Bool = false) -> Bool {
+    public func existsOrWaitForExistence(timeout: TimeInterval = 30, mustWait: Bool = true) -> Bool {
         if exists { return true }
         _ = waitForExistence(timeout: timeout)
         return exists
