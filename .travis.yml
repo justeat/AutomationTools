@@ -6,7 +6,7 @@
 rvm:
 - 2.5.3
  
-osx_image: xcode11.1
+osx_image: xcode11.7
 language: swift
 
 script:
