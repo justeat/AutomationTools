@@ -1,16 +1,27 @@
 # AutomationTools
 
-[![CI Status](https://img.shields.io/travis/justeat/AutomationTools.svg?style=flat)](https://travis-ci.org/justeat/AutomationTools)
-[![Version](https://img.shields.io/cocoapods/v/AutomationTools.svg?style=flat)](https://cocoapods.org/pods/AutomationTools)
-[![License](https://img.shields.io/cocoapods/l/AutomationTools.svg?style=flat)](https://cocoapods.org/pods/AutomationTools)
-[![Platform](https://img.shields.io/cocoapods/p/AutomationTools.svg?style=flat)](https://cocoapods.org/pods/AutomationTools)
+### Core
+
+[![CI Status](https://img.shields.io/travis/justeat/AutomationTools-Core.svg?style=flat)](https://travis-ci.org/justeat/AutomationTools-Core)
+[![Version](https://img.shields.io/cocoapods/v/AutomationTools-Core.svg?style=flat)](https://cocoapods.org/pods/AutomationTools-Core)
+[![License](https://img.shields.io/cocoapods/l/AutomationTools-Core.svg?style=flat)](https://cocoapods.org/pods/AutomationTools-Core)
+[![Platform](https://img.shields.io/cocoapods/p/AutomationTools-Core.svg?style=flat)](https://cocoapods.org/pods/AutomationTools-Core)
+
+### Host
+
+[![CI Status](https://img.shields.io/travis/justeat/AutomationTools-Host.svg?style=flat)](https://travis-ci.org/justeat/AutomationTools-Host)
+[![Version](https://img.shields.io/cocoapods/v/AutomationTools-Host.svg?style=flat)](https://cocoapods.org/pods/AutomationTools-Host)
+[![License](https://img.shields.io/cocoapods/l/AutomationTools-Host.svg?style=flat)](https://cocoapods.org/pods/AutomationTools-Host)
+[![Platform](https://img.shields.io/cocoapods/p/AutomationTools-Host.svg?style=flat)](https://cocoapods.org/pods/AutomationTools-Host)
+
 
 ## About
+
 AutomationTools is a framework that helps you writing better and more maintainable UI tests. It allows launching the app, injecting flags to load the correct configuration and to automate repetitive actions (e.g. filling a basket, logging in a user etc.). The mechanism that is used for injecting state from a test case into the app under test is via the use of launch arguments and environment variables. The launch arguments are passed in to XCUIApplication’s launch method as an array of strings and the environment variables are passed as a dictionary. 
 
 Along with the state configuration functionality, AutomationTools also contains the most reused functionality that we have in our test suites. Things like Page Object base classes, sensible waiting methods and an extension for XCUIApplication all mean that our test suite is easy to maintain and has high readability, flexibility and code reuse.
 
-AutomationTools is sectioned in to Core and HostApp. Core consists of app state configuration, base classes and utilities. HostApp provides a bridge between the test case and the app by unwrapping the testcase injected flags.
+AutomationTools is composed of 2 pods: AutomationTools-Core and AutomationTools-Host. Core consists of app state configuration, base classes and utilities. Host provides a bridge between the test case and the app by unwrapping the testcase injected flags. The reason for using 2 separate podspecs instead of subspecs is to support Apple's new Build System. CocoaPods has a known [limitation](https://github.com/CocoaPods/CocoaPods/issues/8206) with naming the frameworks generated from subspecs.
 
 
 ### Core
@@ -57,7 +68,7 @@ func waitForElementToExist(element: XCUIElement, timeout: Double = 10)
 func waitForElementValueToExist(element: XCUIElement, valueString: String, timeout: Double = 10)
 ```
 
-### HostApp
+### Host
 
 The client should have a component able to inspect the flags in the `ProcessInfo`. This can be done via `AutomationBridge.swift`, which exposes the following methods:
 
@@ -85,7 +96,7 @@ Call the launchApp() method from the test case with relevant configuration to se
 
 ```swift
 import XCTest
-import AutomationTools
+import AutomationTools_Core
 
 class ExampleTestCases: ATTestCase {
     func testExample1() {
@@ -99,13 +110,13 @@ class ExampleTestCases: ATTestCase {
 } 
 ```
 
-#### HostApp
+#### Host
 
 Extend `AutomationBridge` to include methods required for configuring the environment.
 
 ```swift
 import Foundation
-import AutomationTools
+import AutomationTools_Host
 
 public extension AutomationBridge {
 
@@ -147,11 +158,11 @@ Include AutomationTools pod reference in the Checkout module's pod file
 
 ```
 target 'YourProject_MainTarget' do
-pod 'AutomationTools/HostApp', '1.0.0'
+pod 'AutomationTools-Host', '5.0.0'
 end
 
 target 'YourProject_UITestsTarget' do
-pod 'AutomationTools/Core', '1.0.0'
+pod 'AutomationTools-Core', '5.0.0'
 end
 ```
 
