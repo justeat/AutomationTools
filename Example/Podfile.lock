@@ -1,7 +1,7 @@
 PODS:
   - AutomationTools-Core (5.0.0):
-    - AutomationTools-Core/Host (= 5.0.0)
-  - AutomationTools-Core/Host (5.0.0)
+    - AutomationTools-Core/Core (= 5.0.0)
+  - AutomationTools-Core/Core (5.0.0)
   - AutomationTools-Host (5.0.0):
     - AutomationTools-Host/Host (= 5.0.0)
   - AutomationTools-Host/Host (5.0.0)
@@ -17,9 +17,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AutomationTools-Core: d7896d4e0c87f5f6df1f66b9a0a9510e1f0ec683
+  AutomationTools-Core: b446ffd06cd15b74235a3b08bc8bfd79a68e8726
   AutomationTools-Host: ac9b0cd8d7d6769d91e9c152c2a610583553df40
 
 PODFILE CHECKSUM: 0fd856bc8278f852c3844cc09d6d4053099887f2
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.2
