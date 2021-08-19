@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "B2D6158C-D9E1-42AA-B6EC-4336F7F7F8FA",
+      "name" : "Default",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:AutomationTools.xcodeproj",
+        "identifier" : "4F7E257226CD2B01001F66F7",
+        "name" : "AutomationTools_Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
