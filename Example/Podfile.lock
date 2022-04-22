@@ -1,10 +1,10 @@
 PODS:
-  - AutomationTools-Core (5.0.0):
-    - AutomationTools-Core/Core (= 5.0.0)
-  - AutomationTools-Core/Core (5.0.0)
-  - AutomationTools-Host (5.0.0):
-    - AutomationTools-Host/Host (= 5.0.0)
-  - AutomationTools-Host/Host (5.0.0)
+  - AutomationTools-Core (5.0.1):
+    - AutomationTools-Core/Core (= 5.0.1)
+  - AutomationTools-Core/Core (5.0.1)
+  - AutomationTools-Host (5.0.1):
+    - AutomationTools-Host/Host (= 5.0.1)
+  - AutomationTools-Host/Host (5.0.1)
 
 DEPENDENCIES:
   - AutomationTools-Core (from `../`)
@@ -17,8 +17,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AutomationTools-Core: b446ffd06cd15b74235a3b08bc8bfd79a68e8726
-  AutomationTools-Host: ac9b0cd8d7d6769d91e9c152c2a610583553df40
+  AutomationTools-Core: cf1574723a1010475155aa4c89d8b791d207ec12
+  AutomationTools-Host: 2c2694586a841dc6770663a8e34bbd23cc26627b
 
 PODFILE CHECKSUM: f7cb8316364a71f3c6e4a15850df0c9fd673c5bf
 
