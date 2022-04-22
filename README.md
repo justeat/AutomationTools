@@ -166,4 +166,6 @@ pod 'AutomationTools-Core', '5.0.0'
 end
 ```
 
+Or use SPM to add the framework - make sure you add the Core one to your UI tests target and the Host one to your main target.
+
 - Just Eat iOS team
