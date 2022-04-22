@@ -13,9 +13,13 @@ let package = Package(
             targets: ["AutomationTools-Core"]),
         .library(
             name: "AutomationTools-Host",
-            targets: ["AutomationTools-Host"]),
+            targets: ["AutomationTools-Host"])
     ],
     targets: [
+        .target(
+            name: "AutomationTools-Core",
+            path: "AutomationTools/Classes/Core/"
+        ),
         .target(
             name: "AutomationTools-Host",
             path: "AutomationTools/Classes/HostApp/"
