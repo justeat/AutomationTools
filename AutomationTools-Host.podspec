@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'AutomationTools-Host'
-  s.version          = '5.0.1'
+  s.version          = ENV['LIB_VERSION']
   s.summary          = 'iOS UI test framework and guidelines'
   s.homepage         = 'https://github.com/justeat/AutomationTools'
   s.license          = { :type => 'Apache 2.0', :file => 'LICENSE' }
