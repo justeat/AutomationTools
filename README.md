@@ -1,5 +1,7 @@
 # AutomationTools
 
+### Warning: This library is not supported by Just Eat Takeaway anymore and therefore considered deprecated. The repository has been archived.
+
 ### Core
 
 [![CI Status](https://img.shields.io/travis/justeat/AutomationTools-Core.svg?style=flat)](https://travis-ci.org/justeat/AutomationTools-Core)
